@@ -51,3 +51,12 @@ pierwszego mozliwosc stawiania kolejnych znakow x/o
 
             jezeli zmienic zasady gry na takie ze gracz ktory stworzy cykl wybiera pole to wtedy moze wygrac w 100% zaczynajac od rogow w poziomie w pierwszym i ostatnim rzedzie 
 
+
+ETAP I:
+1.Stworzyc plansze oraz mozliwosc stawiania x i o na tej planszy.
+(nie wiem jeszcze czy w terminalu czy w gui)
+2. pamietac o mozliwosci ze wiele x i o moze stac w jednym polu na planszy(max do 9)
+(najlepiej zeby to wygladalo jak w sudoku)
+3. pamietac zeby pola mialy swoje indeksy
+4. przetestowac czy dziala to
+
