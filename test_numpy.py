@@ -1,5 +1,5 @@
 # testowanie działania array i iteracji po nditer
-# nie nadaj się chyba do drukowania macierzy ale może nadawać się 
+# nie nadaj się chyba do drukowania macierzy ale może nadawać się
 # do obliczania czy zachodzi cykl itp
 import numpy as np
 
