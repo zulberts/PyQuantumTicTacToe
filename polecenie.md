@@ -10,7 +10,8 @@ kazdy znak ma indeks (od 1 do nawet9)(postawione w tej samej turze znaki maja te
 3. jezeli powstanie cykl czyli:
 np 3 pola sa splatane bo w polu nr 1 jest x5 i o6, w polu nr 2 jest o6 i x7 a w polu nr 3 jest x7 i x5 
 przez to ze w polu gdzie znajduje sie x5 jest o6 a w polu gdzie jest o6 jest x7, a nastepnie w polu 3 jest x7 ktore przez x5 wraca do x5 to powstaje splatanie.
-4. Gracz ktory mial swoja ture i doprowadzil do cykl, nie wybiera pola w ktorym chce postawic (x/o) lecz gracz drugi. 
+4. Gracz ktory mial swoja ture i doprowadzil do cykl, nie wybiera pola w ktorym chce postawic (x/o) lecz gracz drugi.
+jest inny variant tej gry kiedy losowo wybierane są pola przy tym jak doszło do splątania. Raczej ten model gry będę implementował.
 5. w tym przypadku do cykl doprowadzilo postawienie x7 wiec gracz o wybiera pole gdzie ma stanac x7, nastepnie gracz x wybiera gdzie postawic o6 i zostaje jedno pole dla x5(Nie wiem czy w takiej kolejnosci!!!!)
 
 6. przypadkiw ktorych dochodzi do cykl:
