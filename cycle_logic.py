@@ -27,8 +27,23 @@ def pairs(array: TicTacToeBoard) -> dict:
         for cell in cells:
             if cell.item() in entaglements:
                 entaglements[cell.item()].append(cells.multi_index)
+    return entaglements
+
+
+def pairs_entaglement(array: TicTacToeBoard) -> dict:
+    entaglements = pairs(array)
     for key in list(entaglements.keys()):
         if len(entaglements[key]) < 2:
+            del entaglements[key]
+    entaglements.pop('X', None)
+    entaglements.pop('O', None)
+    return entaglements
+
+
+def pairs_win(array: TicTacToeBoard) -> dict:
+    entaglements = pairs(array)
+    for key in list(entaglements.keys()):
+        if len(entaglements[key]) < 3:
             del entaglements[key]
     return entaglements
 
@@ -48,9 +63,7 @@ def entaglement(array: TicTacToeBoard) -> np:
         (2, 0): 6, (2, 1): 7, (2, 2): 8
     }
     adjacency_matrix = np.full((9, 9), 0, dtype=int)
-    dict_entaglements = pairs(array)
-    dict_entaglements.pop('X', None)
-    dict_entaglements.pop('O', None)
+    dict_entaglements = pairs_entaglement(array)
     for key in dict_entaglements.keys():
         for cell_1, cell_2 in dict_entaglements[key]:
             x = adjacency_matrix_keys[cell_1[:2]]
