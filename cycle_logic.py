@@ -1,5 +1,6 @@
 from tictactoe_board import TicTacToeBoard
 import numpy as np
+import random
 
 
 # I found an algorithm named DFS that could help me to
@@ -20,7 +21,7 @@ def dfs(adjacency_matrix, start, current, visited, parent) -> bool:
 # creates dictionary thanks to which can be used to check who won
 # creates dictionary thanks to which i can descride which pairs are
 # entagled
-def pairs(array: TicTacToeBoard) -> dict:
+def pairs(array: np) -> dict:
     entaglements = {'x1': [], 'o2': [], 'x3': [], 'o4': [], 'x5': [],
                     'o6': [], 'x7': [], 'o8': [], 'x9': [], 'X': [], 'O': []}
     with np.nditer(array, flags=['multi_index']) as cells:
@@ -30,7 +31,7 @@ def pairs(array: TicTacToeBoard) -> dict:
     return entaglements
 
 
-def pairs_entaglement(array: TicTacToeBoard) -> dict:
+def pairs_entaglement(array: np) -> dict:
     entaglements = pairs(array)
     for key in list(entaglements.keys()):
         if len(entaglements[key]) < 2:
@@ -70,3 +71,38 @@ def entaglement(array: TicTacToeBoard) -> np:
             y = adjacency_matrix_keys[cell_2[:2]]
             adjacency_matrix[x, y] = 1
     return adjacency_matrix
+
+
+# function to if cycle occures
+def replace_character(box, prefer: bool):
+    if all(char == ' ' for char in box):
+        return box
+    elif all('x' in char or char == ' ' for char in box):
+        box[4] = 'X'
+    elif all('o' in char or char == ' ' for char in box):
+        box[4] = 'O'
+    elif any('x' in char for char in box) and any('o' in char for char in box):
+        box[4] = 'X' if prefer else 'O'
+    return box
+
+
+# function to if cycle occures
+def clear_box(box):
+    return [' ' if char not in ['X', 'O'] else char for char in box]
+
+
+# if cycle occures
+def modify_array(array: np):
+    mixed_boxes = [(i, j) for i in range(array.shape[0]) for j in range(array.shape[1])
+                   if any('x' in char for char in array[i, j]) and any('o' in char for char in array[i, j])]
+    random.shuffle(mixed_boxes)
+    prefer = random.choice([True, False])
+    for i in range(array.shape[0]):
+        for j in range(array.shape[1]):
+            if (i, j) in mixed_boxes:
+                array[i, j] = replace_character(array[i, j], prefer)
+                prefer = not prefer
+            else:
+                array[i, j] = replace_character(array[i, j])
+            array[i, j] = clear_box(array[i, j])
+    return array
