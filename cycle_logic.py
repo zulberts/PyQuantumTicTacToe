@@ -106,3 +106,12 @@ def modify_array(array: np):
                 array[i, j] = replace_character(array[i, j])
             array[i, j] = clear_box(array[i, j])
     return array
+
+
+def impossible_list(array: np):
+    coordinates_correct = []
+    for row in range(3):
+        for col in range(3):
+            if array[row][col][4] in ['X', 'O']:
+                coordinates_correct.append((row, col))
+    return coordinates_correct
