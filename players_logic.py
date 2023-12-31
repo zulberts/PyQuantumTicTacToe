@@ -5,7 +5,7 @@ def random_choose_player(array):
     available_boxes = []
     for x in range(3):
         for y in range(3):
-            if array[x, y, 4] not in ['X', 'O']:
+            if array[x, y, 4] not in ["X", "O"]:
                 available_boxes.append((x, y))
     if len(available_boxes) >= 2:
         return random.sample(available_boxes, 2)
@@ -17,14 +17,15 @@ def strategic_choose_player(array):
     empty_boxes = []
     for x in range(3):
         for y in range(3):
-            if all(array[x, y, z] == ' ' for z in range(9)):
+            if all(array[x, y, z] == " " for z in range(9)):
                 empty_boxes.append((x, y))
     if len(empty_boxes) > 1:
         return random.sample(empty_boxes, 2)
     elif len(empty_boxes) == 1:
         choosen_box = empty_boxes[0]
-        other_boxes = [(x, y) for x in range(3) for y in range(3)
-                       if (x, y) != choosen_box]
+        other_boxes = [
+            (x, y) for x in range(3) for y in range(3) if (x, y) != choosen_box
+        ]
         if other_boxes:
             return [choosen_box, random.choice(other_boxes)]
         else:
@@ -37,3 +38,33 @@ def get_move_value(number):
     values = ["x1", "o2", "x3", "o4", "x5", "o6", "x7", "o8", "x9"]
     if 1 <= number <= 9:
         return values[number - 1]
+
+
+def input_boxes(impossible_moves):
+    boxes = {
+        1: (0, 0),
+        2: (0, 1),
+        3: (0, 2),
+        4: (1, 0),
+        5: (1, 1),
+        6: (1, 2),
+        7: (2, 0),
+        8: (2, 1),
+        9: (2, 2),
+    }
+    message = "Niewłaściwe wartości. Upewnij się, że podałeś liczby od 1 do 9."
+    while True:
+        try:
+            print("Podaj dwa numery pól od 1 do 9 (oddzielone spacją):")
+            values = input().split()
+            if len(values) != 2:
+                print("Należy podać dokładnie dwie wartości.")
+                continue
+            input_box1, input_box2 = map(int, values)
+            box1, box2 = boxes[input_box1], boxes[input_box2]
+            if box1 in impossible_moves or box2 in impossible_moves:
+                print("Wybrane pola są niedozwolone. Wybierz inne.")
+                continue
+            return [box1, box2]
+        except (ValueError, KeyError):
+            print(message)
