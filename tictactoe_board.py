@@ -1,7 +1,7 @@
 import numpy as np
 from print_functions import print_matrix
-from cycle_logic import cycle, entaglement, modify_array, impossible_list
 from wining_logic import check_win
+from cycle_logic import cycle, entaglement, modify_array, impossible_list
 
 
 class TicTacToeBoard:
@@ -17,7 +17,7 @@ class TicTacToeBoard:
         if (x, y) not in self.inpossible_moves:
             self.board[x, y, z] = value
         else:
-            print('Move is not possible')
+            print("Move is not possible")
 
     def __cycle__(self):
         adjacency_array = entaglement(self.board)

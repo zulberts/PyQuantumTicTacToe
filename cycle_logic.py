@@ -1,4 +1,3 @@
-from tictactoe_board import TicTacToeBoard
 import numpy as np
 import random
 
@@ -41,7 +40,7 @@ def pairs_entaglement(array: np) -> dict:
     return entaglements
 
 
-def pairs_win(array: TicTacToeBoard) -> dict:
+def pairs_win(array: np) -> dict:
     entaglements = pairs(array)
     for key in list(entaglements.keys()):
         if len(entaglements[key]) < 3:
@@ -57,7 +56,7 @@ def cycle(adjacency_matrix, start) -> bool:
 
 
 # Creates array(macierz sąsiedztwa) in which cells entaglement occures
-def entaglement(array: TicTacToeBoard) -> np:
+def entaglement(array: np) -> np:
     adjacency_matrix_keys = {
         (0, 0): 0, (0, 1): 1, (0, 2): 2,
         (1, 0): 3, (1, 1): 4, (1, 2): 5,
