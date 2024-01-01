@@ -77,7 +77,7 @@ def test_strategic_two_boxes_available():
     assert len(result) == 2
     for box in result:
         assert two_boxes_matrix[box[0], box[1], 4] not in ["X", "O"]
-    assert result == [(0, 0), (0, 1)]
+    assert sorted(result) == sorted([(0, 0), (0, 1)])
 
 
 def test_strategic_one_box_available():
