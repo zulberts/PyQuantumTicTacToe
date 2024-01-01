@@ -1,7 +1,8 @@
 import random
+import numpy as np
 
 
-def random_choose_player(array):
+def random_choose_player(array: np) -> list:
     available_boxes = []
     for x in range(3):
         for y in range(3):
@@ -13,34 +14,38 @@ def random_choose_player(array):
         return None
 
 
-def strategic_choose_player(array):
+def strategic_choose_player(array: np.array) -> list:
     empty_boxes = []
     for x in range(3):
         for y in range(3):
-            if all(array[x, y, z] == " " for z in range(9)):
+            if array[x, y, 4] not in ["X", "O"] and all(
+                array[x, y, z] == " " for z in range(9)
+            ):
                 empty_boxes.append((x, y))
     if len(empty_boxes) > 1:
         return random.sample(empty_boxes, 2)
     elif len(empty_boxes) == 1:
-        choosen_box = empty_boxes[0]
-        other_boxes = [
-            (x, y) for x in range(3) for y in range(3) if (x, y) != choosen_box
-        ]
+        chosen_box = empty_boxes[0]
+        other_boxes = []
+        for x in range(3):
+            for y in range(3):
+                if array[x, y, 4] not in ["X", "O"] and chosen_box != (x, y):
+                    other_boxes.append((x, y))
         if other_boxes:
-            return [choosen_box, random.choice(other_boxes)]
+            return [chosen_box, random.choice(other_boxes)]
         else:
-            return [choosen_box]
+            return [chosen_box]
     else:
         return None
 
 
-def get_move_value(number):
+def get_move_value(number) -> str:
     values = ["x1", "o2", "x3", "o4", "x5", "o6", "x7", "o8", "x9"]
     if 1 <= number <= 9:
         return values[number - 1]
 
 
-def input_boxes(impossible_moves):
+def input_boxes(impossible_moves: list) -> list:
     boxes = {
         1: (0, 0),
         2: (0, 1),
