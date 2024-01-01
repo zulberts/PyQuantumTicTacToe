@@ -32,5 +32,7 @@ def check_win(matrix: np.ndarray) -> str:
         return "Gra kończy się remisem!"
     elif len(win) == 1:
         return f"Gre wygrywa {win[0]}!"
+    elif (np.all(np.isin(matrix, ["X", "O"])) and len(win) == 0):
+        return "Gra kończy się remisem!"
     else:
         return None
