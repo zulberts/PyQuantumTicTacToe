@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def transform_matrix_print(array: np) -> np:
+def transform_matrix_to_print(array: np) -> np:
     transformed_array = np.full((9, 9), " ", dtype=object)
     for i in range(3):
         for j in range(3):
@@ -14,7 +14,7 @@ def transform_matrix_print(array: np) -> np:
 
 
 def print_matrix(array: np.ndarray) -> str:
-    array = transform_matrix_print(array)
+    array = transform_matrix_to_print(array)
     array_string = ""
     for i in range(9):
         if i % 3 == 0 and i != 0:
@@ -24,4 +24,5 @@ def print_matrix(array: np.ndarray) -> str:
                 array_string += "| "
             array_string += f"{array[i, j]:^3} "
         array_string += "\n"
+    array_string.rstrip('\n')
     return array_string
