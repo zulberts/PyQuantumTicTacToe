@@ -36,7 +36,13 @@ def strategic_choose_player(array: np.array) -> list:
         else:
             return [chosen_box]
     else:
-        return None
+        available_boxes = []
+        for x in range(3):
+            for y in range(3):
+                if array[x, y, 4] not in ["X", "O"]:
+                    available_boxes.append((x, y))
+        if len(available_boxes) >= 2:
+            return random.sample(available_boxes, 2)
 
 
 def get_move_value(number) -> str:
