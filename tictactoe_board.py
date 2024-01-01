@@ -1,7 +1,8 @@
 import numpy as np
 from print_functions import print_matrix
 from wining_logic import check_win
-from cycle_logic import cycle, entaglement, modify_array, impossible_list
+from cycle_logic import cycle, create_adjacency_matrix, modify_array
+from cycle_logic import impossible_list
 
 
 class TicTacToeBoard:
@@ -10,23 +11,23 @@ class TicTacToeBoard:
         Creates an instance of the starting board.
         """
         self.board = np.full((3, 3, 9), " ", dtype="object")
-        self.inpossible_moves = []
+        self.impossible_moves = []
 
-    def move(self, value, x, y) -> bool:
+    def move(self, value, x, y):
         z = int(value[1]) - 1
-        if (x, y) not in self.inpossible_moves:
+        if (x, y) not in self.impossible_moves:
             self.board[x, y, z] = value
         else:
             print("Move is not possible")
 
     def __cycle__(self):
-        adjacency_array = entaglement(self.board)
+        adjacency_array = create_adjacency_matrix(self.board)
         if cycle(adjacency_array, 0):
             self.board = modify_array(self.board)
-            self.inpossible_moves.extend(impossible_list(self.board))
+            self.impossible_moves.extend(impossible_list(self.board))
 
-    def __str__(self) -> None:
-        print_matrix(self.board)
+    def __str__(self) -> str:
+        return print_matrix(self.board)
 
     def __win__(self):
         check_win(self.board)
