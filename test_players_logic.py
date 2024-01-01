@@ -97,5 +97,3 @@ def test_get_move_value():
         expected_output = "x" if i % 2 != 0 else "o"
         expected_output += str(i)
         assert get_move_value(i) == expected_output
-
-
