@@ -1,23 +1,25 @@
 import numpy as np
-from cycle_logic import pairs
-from cycle_logic import transform_list
-from cycle_logic import pairs_entaglement
-from cycle_logic import create_adjacency_matrix
-from cycle_logic import cycle
-from cycle_logic import replace_character
-from cycle_logic import clear_box
-from cycle_logic import modify_array
-from cycle_logic import impossible_list
+from cycle_logic import (
+    quantum_pairs,
+    transform_list,
+    pairs_entaglement,
+    create_adjacency_matrix,
+    cycle,
+    replace_character,
+    clear_box,
+    modify_array,
+    impossible_list
+)
 
 
-def test_pairs_empty_array():
+def test_quantum_pairs_empty_array():
     empty_array = np.full((3, 3, 9), " ")
-    result_empty = pairs(empty_array)
+    result_empty = quantum_pairs(empty_array)
     for key in result_empty:
         assert result_empty[key] == []
 
 
-def test_pairs_mixed_matrix():
+def test_quantum_pairs_mixed_matrix():
     array = np.array(
         [
             [
@@ -37,18 +39,18 @@ def test_pairs_mixed_matrix():
             ],
         ]
     )
-    result = pairs(array)
+    result = quantum_pairs(array)
     for key in result:
         for pos in result[key]:
             assert array[pos] == key
 
 
-def test_pairs_full_matrix():
-    matrix = np.full((3, 3, 9), "X")
-    result = pairs(matrix)
-    assert len(result["X"]) == 3 * 3 * 9
+def test_quantum_pairs_full_matrix():
+    matrix = np.full((3, 3, 9), "x1")
+    result = quantum_pairs(matrix)
+    assert len(result["x1"]) == 3 * 3 * 9
     for key in result:
-        if key != "X":
+        if key != "x1":
             assert len(result[key]) == 0
 
 
@@ -66,7 +68,7 @@ def test_transform_list_multiple():
     assert transform_list(input_list) == output_list
 
 
-def test_pairs_entanglement_x1():
+def test_quantum_pairs_entanglement_x1():
     array = np.array(
         [
             [
@@ -172,7 +174,7 @@ def test_adjacency_matrix_empty():
     )
     result = create_adjacency_matrix(array)
     expected = np.zeros((9, 9), dtype=int)
-    return np.array_equal(result, expected)
+    assert np.array_equal(result, expected)
 
 
 def test_adjacency_matrix_single_pair():
@@ -199,10 +201,99 @@ def test_adjacency_matrix_single_pair():
     expected = np.zeros((9, 9), dtype=int)
     expected[0, 3] = 1
     expected[3, 0] = 1
-    return np.array_equal(result, expected)
+    assert np.array_equal(result, expected)
 
 
-def test_adjacency_matrix_multiple_pairs():
+def test_adjacency_matrix_two_pairs():
+    array = np.array(
+        [
+            [
+                ["x1", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", "o2", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+            ],
+            [
+                ["x1", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", "o2", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+            ],
+            [
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+            ],
+        ]
+    )
+    result = create_adjacency_matrix(array)
+    expected = np.zeros((9, 9), dtype=int)
+    expected[0, 3] = 1
+    expected[3, 0] = 1
+    expected[1, 4] = 1
+    expected[4, 1] = 1
+    assert np.array_equal(result, expected)
+
+
+def test_adjacency_matrix_three_pairs():
+    array = np.array(
+        [
+            [
+                ["x1", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", "o2", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+            ],
+            [
+                ["x1", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", "o2", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", "x3"],
+            ],
+            [
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", "x3"],
+            ],
+        ]
+    )
+    result = create_adjacency_matrix(array)
+    expected = np.zeros((9, 9), dtype=int)
+    expected[0, 3] = 1
+    expected[3, 0] = 1
+    expected[1, 4] = 1
+    expected[4, 1] = 1
+    expected[8, 5] = 1
+    expected[5, 8] = 1
+    assert np.array_equal(result, expected)
+
+
+def test_adjacency_matrix_two_pairs_with_XOs():
+    array = np.array(
+        [
+            [
+                ["x1", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", "o2", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+            ],
+            [
+                ["x1", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", "o2", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", "X", " ", " ", " ", " "],
+            ],
+            [
+                [" ", " ", " ", " ", "X", " ", " ", " ", " "],
+                [" ", " ", " ", " ", "O", " ", " ", " ", " "],
+                [" ", " ", " ", " ", "O", " ", " ", " ", " "],
+            ],
+        ]
+    )
+    result = create_adjacency_matrix(array)
+    expected = np.zeros((9, 9), dtype=int)
+    expected[0, 3] = 1
+    expected[3, 0] = 1
+    expected[1, 4] = 1
+    expected[4, 1] = 1
+    assert np.array_equal(result, expected)
+
+
+def test_adjacency_matrix_same_pairs():
     array = np.array(
         [
             [
@@ -226,7 +317,7 @@ def test_adjacency_matrix_multiple_pairs():
     expected = np.zeros((9, 9), dtype=int)
     expected[0, 3] = 1
     expected[3, 0] = 1
-    return np.array_equal(result, expected)
+    assert np.array_equal(result, expected)
 
 
 def test_cycle_occures():
