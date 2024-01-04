@@ -389,6 +389,20 @@ def test_cycle_not_occures():
     assert cycle(array, 0) is False
 
 
+#     o2      |     o2      | x1
+#             |     x5      | o4
+#             |             |
+# ---------------------------------------
+#             |             |         x3
+# o4  x5  o6  |         o6  |
+#         x9  |     o8      |     o8
+# ---------------------------------------
+# x1          |             |         x3
+#             |             |
+#             | x7          | x7      x9
+# przykład kiedy cykl nie zaszedł
+
+
 def test_replace_character_empty():
     box = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     output = [" ", " ", " ", " ", " ", " ", " ", " ", " "]

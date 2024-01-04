@@ -13,7 +13,7 @@ def transform_matrix_to_print(array: np) -> np:
     return transformed_array
 
 
-def print_matrix(array: np.ndarray) -> str:
+def print_matrix(array: np) -> str:
     array = transform_matrix_to_print(array)
     array_string = ""
     for i in range(9):
