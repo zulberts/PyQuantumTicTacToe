@@ -2,7 +2,11 @@ import numpy as np
 import random
 
 
-def pairs(array: np) -> dict:
+def quantum_pairs(array: np) -> dict:
+    """
+    Funcion search thru the matrix and returns quantum pairs of the
+    x's and o's.
+    """
     entanglements = {
         "x1": [],
         "o2": [],
@@ -12,9 +16,7 @@ def pairs(array: np) -> dict:
         "o6": [],
         "x7": [],
         "o8": [],
-        "x9": [],
-        "X": [],
-        "O": [],
+        "x9": []
     }
     for x in range(3):
         for y in range(3):
@@ -25,22 +27,32 @@ def pairs(array: np) -> dict:
     return entanglements
 
 
-def transform_list(list_coordinates):
+def transform_list(list_coordinates: tuple) -> tuple:
+    """
+    Function transforms 3-dimensional coordinates to 2-dimensional
+    coordinates.
+    """
     return [(x, y) for x, y, z, in list_coordinates]
 
 
 def pairs_entaglement(array: np) -> dict:
-    entaglements = pairs(array)
+    """
+    Function thanks to quantum pairs can return pairs 2-dimensional
+    and verify if pairs are entaglemented.
+    """
+    entaglements = quantum_pairs(array)
     for key in list(entaglements.keys()):
         entaglements[key] = transform_list(entaglements[key])
         if len(entaglements[key]) < 2:
             del entaglements[key]
-    entaglements.pop("X", None)
-    entaglements.pop("O", None)
     return entaglements
 
 
-def create_adjacency_matrix(array):
+def create_adjacency_matrix(array: np) -> np:
+    """
+    Function thanks to entaglement pairs creates adjacency matrix
+    which can be used with DFS algorithm to verify if cycle occures.
+    """
     adjacency_matrix_keys = {
         (0, 0): 0,
         (0, 1): 1,
@@ -65,6 +77,10 @@ def create_adjacency_matrix(array):
 
 
 def dfs(adjacency_matrix, start, current, visited, parent) -> bool:
+    """
+    DFS algorithm. Basiclly it is used with graphs, but can be also used with
+    adjacency matrix which can represent graph.
+    """
     visited[current] = True
     for neighbor in range(len(adjacency_matrix)):
         if adjacency_matrix[current][neighbor] == 1:
@@ -76,7 +92,10 @@ def dfs(adjacency_matrix, start, current, visited, parent) -> bool:
     return False
 
 
-def cycle(array: np, start) -> bool:
+def cycle(array: np, start: int) -> bool:
+    """
+    Function detect if cycle occured.
+    """
     adjacency_matrix = create_adjacency_matrix(array)
     pairs_dict = pairs_entaglement(array)
     values = list(pairs_dict.values())
@@ -88,7 +107,10 @@ def cycle(array: np, start) -> bool:
     return dfs(adjacency_matrix, start, start, visited, None)
 
 
-def replace_character(box, prefer: bool):
+def replace_character(box: np, prefer: bool) -> np:
+    """
+    Function changes box(matrix 1x9) if cycle occures.
+    """
     if all(char == " " for char in box):
         return box
     elif all("x" in char or char == " " for char in box):
@@ -101,10 +123,16 @@ def replace_character(box, prefer: bool):
 
 
 def clear_box(box):
+    """
+    Function clears the box after cycle occured in that box.
+    """
     return [" " if char not in ["X", "O"] else char for char in box]
 
 
 def modify_array(array: np):
+    """
+    Function modify array after cycle occured.
+    """
     mixed_boxes = [
         (i, j)
         for i in range(array.shape[0])
@@ -125,10 +153,14 @@ def modify_array(array: np):
     return array
 
 
-def impossible_list(array: np):
-    coordinates_correct = []
+def impossible_list(array: np) -> list[tuple]:
+    """
+    Function check which boxes are after cycle, and returns list of
+    boxes that player can't choose.
+    """
+    coordinates_incorrect = []
     for row in range(3):
         for col in range(3):
             if array[row][col][4] in ["X", "O"]:
-                coordinates_correct.append((row, col))
-    return coordinates_correct
+                coordinates_incorrect.append((row, col))
+    return coordinates_incorrect
