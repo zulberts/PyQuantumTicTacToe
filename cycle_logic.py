@@ -122,14 +122,14 @@ def replace_character(box: np, prefer: bool) -> np:
     return box
 
 
-def clear_box(box):
+def clear_box(box: np) -> np:
     """
     Function clears the box after cycle occured in that box.
     """
     return [" " if char not in ["X", "O"] else char for char in box]
 
 
-def modify_array(array: np):
+def modify_array(array: np) -> np:
     """
     Function modify array after cycle occured.
     """
