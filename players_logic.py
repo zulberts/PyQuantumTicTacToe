@@ -3,6 +3,9 @@ import numpy as np
 
 
 def random_choose_player(array: np) -> list:
+    """
+    Function that imitates the player that returns random boxes.
+    """
     available_boxes = []
     for x in range(3):
         for y in range(3):
@@ -14,7 +17,10 @@ def random_choose_player(array: np) -> list:
         return None
 
 
-def strategic_choose_player(array: np.array) -> list:
+def strategic_choose_player(array: np) -> list:
+    """
+    Function that imitates the player that returns strategic boxes.
+    """
     empty_boxes = []
     for x in range(3):
         for y in range(3):
@@ -45,13 +51,21 @@ def strategic_choose_player(array: np.array) -> list:
             return random.sample(available_boxes, 2)
 
 
-def get_move_value(number) -> str:
+def get_move_value(number: int) -> str:
+    """
+    Function that returns what value should be placed in chosen
+    by player box.
+    """
     values = ["x1", "o2", "x3", "o4", "x5", "o6", "x7", "o8", "x9"]
     if 1 <= number <= 9:
         return values[number - 1]
 
 
 def input_boxes(impossible_moves: list) -> list:
+    """
+    Function to take from player the values of whare player want
+    to place his x/o.
+    """
     boxes = {
         1: (0, 0),
         2: (0, 1),

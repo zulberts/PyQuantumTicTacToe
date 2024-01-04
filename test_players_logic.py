@@ -1,7 +1,9 @@
 import numpy as np
-from players_logic import random_choose_player
-from players_logic import strategic_choose_player
-from players_logic import get_move_value
+from players_logic import (
+    random_choose_player,
+    strategic_choose_player,
+    get_move_value
+)
 
 
 def test_random_empty_matrix():
