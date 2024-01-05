@@ -2,6 +2,15 @@ import numpy as np
 
 
 def transform_matrix_to_print(array: np) -> np:
+    """
+    Transforms a 3D numpy array representing a quantum tic-tac-toe board into
+    a 2D numpy array for easy printing.
+
+    :param array: A 3D numpy array representing the game board.
+    :type array: np
+    :return: A 2D 9x9 numpy array suitable for printing the game board.
+    :rtype: np
+    """
     transformed_array = np.full((9, 9), " ", dtype=object)
     for i in range(3):
         for j in range(3):
@@ -14,6 +23,20 @@ def transform_matrix_to_print(array: np) -> np:
 
 
 def print_matrix(array: np) -> str:
+    """
+    Converts the quantum tic-tac-toe game board into a formatted
+    string for display.
+
+    This function takes a 3D numpy array representing the game board and
+    transforms it into a string using `transform_matrix_to_print`.
+    The resulting string displays the 9x9 game board with dividers
+    between each 3x3 game.
+
+    :param array: A 3D numpy array representing the game board.
+    :type array: np
+    :return: A string representing the formatted game board.
+    :rtype: str
+    """
     array = transform_matrix_to_print(array)
     array_string = ""
     for i in range(9):

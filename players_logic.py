@@ -4,7 +4,14 @@ import numpy as np
 
 def random_choose_player(array: np) -> list:
     """
-    Function that imitates the player that returns random boxes.
+    Function that imitates a player choosing two random available boxes from
+    a given game board.
+
+    :param array: The game board represented as a numpy array.
+    :type array: np
+    :return: A list of two randomly selected available box coordinates, or
+    None if less than two boxes are available.
+    :rtype: list
     """
     available_boxes = []
     for x in range(3):
@@ -19,7 +26,14 @@ def random_choose_player(array: np) -> list:
 
 def strategic_choose_player(array: np) -> list:
     """
-    Function that imitates the player that returns strategic boxes.
+    Function that imitates a player choosing two strategic boxes based
+    on the current game board status.
+
+    :param array: The game board represented as a numpy array.
+    :type array: np
+    :return: A list of two strategically selected box coordinates.
+    The selection is based on the emptiness and availability of the boxes.
+    :rtype: list
     """
     empty_boxes = []
     for x in range(3):
@@ -53,8 +67,13 @@ def strategic_choose_player(array: np) -> list:
 
 def get_move_value(number: int) -> str:
     """
-    Function that returns what value should be placed in chosen
-    by player box.
+    Function that returns a string value corresponding to the move number in a
+    quantum tic-tac-toe game.
+
+    :param number: The move number, ranging from 1 to 9.
+    :type number: int
+    :return: A string representing the move value ('x1', 'o2', etc.).
+    :rtype: str
     """
     values = ["x1", "o2", "x3", "o4", "x5", "o6", "x7", "o8", "x9"]
     if 1 <= number <= 9:
@@ -63,8 +82,15 @@ def get_move_value(number: int) -> str:
 
 def input_boxes(impossible_moves: list) -> list:
     """
-    Function to take from player the values of whare player want
-    to place his x/o.
+    Function to interactively take two box choices from the player,
+    ensuring the choices are valid and not already taken.
+
+    :param impossible_moves: A list of box coordinates that are not allowed
+    to be chosen.
+    :type impossible_moves: list
+    :return: A list of two tuples, each representing the coordinates
+    of the chosen boxes.
+    :rtype: list
     """
     boxes = {
         1: (0, 0),

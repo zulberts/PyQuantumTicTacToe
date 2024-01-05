@@ -7,12 +7,6 @@ from players_logic import (
 from tictactoe_board import TicTacToeBoard
 
 
-# Czasem nie dochodzi do cyklu, ale to bardzo rzadko jak np zostało tylko 5 pól
-# i w tych 5 polach zostaną wszędzie rozłożone xx i oy, problem jest w
-# algorytmie który wykrywa cykl
-# ponad to zmodyfikowałem zasady i dodałem losowość podczas powstania cyklu
-# bo nie potrafiłem napisać tak złożonego algorytmu żeby uwzględnić każdą
-# możliwą pozycje w macierzy
 def main():
     while True:
         print("Witaj w Kwantowym Kółko i Krzyżyk!")

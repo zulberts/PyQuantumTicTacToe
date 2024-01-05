@@ -4,8 +4,14 @@ import random
 
 def quantum_pairs(array: np) -> dict:
     """
-    Funcion search thru the matrix and returns quantum pairs of the
-    x's and o's.
+    Searches through a 3D numpy array representing a quantum tic-tac-toe board
+    and returns quantum pairs of 'X's and 'O's.
+
+    :param array: A 3D numpy array representing the quantum tic-tac-toe board.
+    :type array: np
+    :return: A dictionary mapping each quantum pair ('x1', 'o2', etc.)
+    to a list of coordinates where they occur.
+    :rtype: dict
     """
     entanglements = {
         "x1": [],
@@ -16,7 +22,7 @@ def quantum_pairs(array: np) -> dict:
         "o6": [],
         "x7": [],
         "o8": [],
-        "x9": []
+        "x9": [],
     }
     for x in range(3):
         for y in range(3):
@@ -29,16 +35,27 @@ def quantum_pairs(array: np) -> dict:
 
 def transform_list(list_coordinates: tuple) -> tuple:
     """
-    Function transforms 3-dimensional coordinates to 2-dimensional
-    coordinates.
+    Transforms a list of 3-dimensional coordinates to
+    2-dimensional coordinates.
+
+    :param list_coordinates: A tuple of 3-dimensional coordinates.
+    :type list_coordinates: tuple
+    :return: A tuple of 2-dimensional coordinates.
+    :rtype: tuple
     """
     return [(x, y) for x, y, z, in list_coordinates]
 
 
 def pairs_entaglement(array: np) -> dict:
     """
-    Function thanks to quantum pairs can return pairs 2-dimensional
-    and verify if pairs are entaglemented.
+    Identifies and returns pairs of 2-dimensional coordinates
+    that are entangled in a quantum tic-tac-toe game.
+
+    :param array: A 3D numpy array representing the
+    quantum tic-tac-toe board.
+    :type array: np
+    :return: A dictionary with pairs of entangled coordinates.
+    :rtype: dict
     """
     entaglements = quantum_pairs(array)
     for key in list(entaglements.keys()):
@@ -50,8 +67,13 @@ def pairs_entaglement(array: np) -> dict:
 
 def create_adjacency_matrix(array: np) -> np:
     """
-    Function thanks to entaglement pairs creates adjacency matrix
-    which can be used with DFS algorithm to verify if cycle occures.
+    Creates an adjacency matrix from entangled pairs in a
+    quantum tic-tac-toe board, useful for detecting cycles.
+
+    :param array: A 3D numpy array representing the quantum tic-tac-toe board.
+    :type array: np
+    :return: An adjacency matrix representing entangled pairs.
+    :rtype: np
     """
     adjacency_matrix_keys = {
         (0, 0): 0,
@@ -78,8 +100,22 @@ def create_adjacency_matrix(array: np) -> np:
 
 def dfs(adjacency_matrix, start, current, visited, parent) -> bool:
     """
-    DFS algorithm. Basiclly it is used with graphs, but can be also used with
-    adjacency matrix which can represent graph.
+    Depth-First Search (DFS) algorithm, typically used with graphs,
+    applied here to an adjacency matrix representing
+    a quantum tic-tac-toe board.
+
+    :param adjacency_matrix: The adjacency matrix representing the game board.
+    :type adjacency_matrix: np.ndarray
+    :param start: The starting node for DFS.
+    :param current: The current node in the DFS.
+    :param visited: List of visited nodes.
+    :param parent: The parent node in the DFS.
+    :type start: int
+    :type current: int
+    :type visited: list
+    :type parent: int
+    :return: Boolean indicating if a cycle is found.
+    :rtype: bool
     """
     visited[current] = True
     for neighbor in range(len(adjacency_matrix)):
@@ -94,7 +130,14 @@ def dfs(adjacency_matrix, start, current, visited, parent) -> bool:
 
 def cycle(array: np, start: int) -> bool:
     """
-    Function detect if cycle occured.
+    Detects if a cycle has occurred in a quantum tic-tac-toe game.
+
+    :param array: A 3D numpy array representing the quantum tic-tac-toe board.
+    :type array: np
+    :param start: The starting point for cycle detection.
+    :type start: int
+    :return: Boolean indicating if a cycle is present.
+    :rtype: bool
     """
     adjacency_matrix = create_adjacency_matrix(array)
     pairs_dict = pairs_entaglement(array)
@@ -109,7 +152,17 @@ def cycle(array: np, start: int) -> bool:
 
 def replace_character(box: np, prefer: bool) -> np:
     """
-    Function changes box(matrix 1x9) if cycle occures.
+    Changes a box (1x9 matrix) in the quantum tic-tac-toe board
+    based on whether a cycle occurs.
+
+    :param box: A 1x9 numpy array representing a box in the
+    quantum tic-tac-toe board.
+    :param prefer: Boolean indicating preference between 'X' and 'O'
+    if a cycle occurs.
+    :type box: np
+    :type prefer: bool
+    :return: The modified box.
+    :rtype: np
     """
     if all(char == " " for char in box):
         return box
@@ -124,14 +177,26 @@ def replace_character(box: np, prefer: bool) -> np:
 
 def clear_box(box: np) -> np:
     """
-    Function clears the box after cycle occured in that box.
+    Clears a box in the quantum tic-tac-toe board after a cycle has occurred.
+
+    :param box: A 1x9 numpy array representing a box in the
+    quantum tic-tac-toe board.
+    :type box: np
+    :return: The cleared box.
+    :rtype: np
     """
     return [" " if char not in ["X", "O"] else char for char in box]
 
 
 def modify_array(array: np) -> np:
     """
-    Function modify array after cycle occured.
+    Modifies the entire quantum tic-tac-toe board after
+    cycles have been detected and resolved.
+
+    :param array: A 3D numpy array representing the quantum tic-tac
+    :type array: np
+    :return: Modified array.
+    :rtype: np
     """
     mixed_boxes = [
         (i, j)
@@ -155,8 +220,15 @@ def modify_array(array: np) -> np:
 
 def impossible_list(array: np) -> list[tuple]:
     """
-    Function check which boxes are after cycle, and returns list of
-    boxes that player can't choose.
+    Determines which boxes in the quantum tic-tac-toe
+    board are unavailable for selection after cycles.
+
+    :param array: A 3D numpy array representing the
+    quantum tic-tac-toe board.
+    :type array: np.ndarray
+    :return: A list of tuples representing the coordinates
+    of boxes that cannot be selected.
+    :rtype: list[tuple]
     """
     coordinates_incorrect = []
     for row in range(3):
