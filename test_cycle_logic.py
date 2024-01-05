@@ -8,7 +8,7 @@ from cycle_logic import (
     replace_character,
     clear_box,
     modify_array,
-    impossible_list
+    impossible_list,
 )
 
 
@@ -389,18 +389,27 @@ def test_cycle_not_occures():
     assert cycle(array, 0) is False
 
 
-#     o2      |     o2      | x1
-#             |     x5      | o4
-#             |             |
-# ---------------------------------------
-#             |             |         x3
-# o4  x5  o6  |         o6  |
-#         x9  |     o8      |     o8
-# ---------------------------------------
-# x1          |             |         x3
-#             |             |
-#             | x7          | x7      x9
-# przykład kiedy cykl nie zaszedł
+def test_cycle_occures_multiples():
+    array = np.array(
+        [
+            [
+                [" ", "o2", " ", " ", " ", " ", " ", " ", " "],
+                [" ", "o2", " ", " ", "x5", " ", " ", " ", " "],
+                ["x1", " ", " ", "o4", " ", " ", " ", " ", " "],
+            ],
+            [
+                [" ", " ", " ", "o4", "x5", "o6", " ", " ", "x9"],
+                [" ", " ", " ", " ", " ", "o6", " ", "o8", " "],
+                [" ", " ", "x3", " ", " ", " ", " ", "o8", " "],
+            ],
+            [
+                ["x1", " ", " ", " ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " ", "x7", " ", " "],
+                [" ", " ", "x3", " ", " ", " ", "x7", " ", "x9"],
+            ],
+        ]
+    )
+    assert cycle(array, 4) is True
 
 
 def test_replace_character_empty():
