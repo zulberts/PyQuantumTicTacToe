@@ -95,4 +95,7 @@ def print_rules():
         "   Gracz może też wybrać, czy chce grać jako X czy jako O.\n"
         "7. Gra automatycznie sprawdza, kto wygrał i wyświetla tę wiadomość w "
         "terminalu."
+        "8. Pola są numerowane od 1 do 9. Pole w lewym górym rogu planszy to 1"
+        "\n Pole w prawym dolnym rogu planszy to 9. Pole nr 2 to pole środkowe"
+        "\n w górnym rzędzie, reszte pól numerujemy analogicznie."
     )
