@@ -52,3 +52,9 @@ Testując nadleży użyć komendy:
 
 # Dalsza dokumentacja
 Szczegółowa dokumentacja znajduje się w pliku PDF.
+
+
+# Rozwiązaywanie problemów
+Jeżeli pojawią się problemy przy uruchamianiu gry lub przy testowaniu w
+wirtualnym środowisku należy z niego wyjść, zainstalować biblioteke numpy
+`pip install numpy` i uruchomić program bez użycia venv.
