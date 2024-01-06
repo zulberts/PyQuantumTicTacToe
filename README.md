@@ -4,7 +4,7 @@
 
 Projekt to gra kwantowe kółko krzyżyk w termialu.
 
----
+
 # Instalacja gry
 ---
 git clone https://gitlab-stud.elka.pw.edu.pl/askutnik/projekt-pipr-quantum-tic-tac-toe.git
@@ -13,7 +13,7 @@ Następnie w termialu należy wpisać:
 Linux: `python3 game.py`
 Windows: `python game.py`
 
----
+
 # Instrukcja dla graczy
 ---
 Zasady gry:
@@ -44,3 +44,7 @@ tak, że dwóch graczy mogłoby wygrać.
 -gracz który wybiera pola strategicznie.(pola bez żadnego x lub o)
 Oraz gracz ma możliwość wyboru czy chce grać jako X lub jako O.
 7. Gra automatycznie sprawdza, kto wygrał i wyświetla tą wiadomość w terminalu.
+
+
+# Dalsza dokumentacja
+Szczegółowa dokumentacja znajduje się w pliku PDF.

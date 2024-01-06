@@ -12,7 +12,11 @@ def main():
     print_rules()
     while True:
         print("Witaj w Kwantowym Kółko i Krzyżyk!")
-        message = "Wybierz przeciwnika (1 - losowy, 2 - strategiczny): "
+        message = (
+                    "Wybierz przeciwnika, jeżeli podasz złą wartość będziesz"
+                    "grał przeciwko graczu \nktóry wybiera pola strategicznie"
+                    " (1 - losowy, 2 - strategiczny):"
+        )
         opponent = input(message)
         if opponent == "1":
             choose_player = random_choose_player
@@ -32,8 +36,8 @@ def main():
                 player_move_value = get_move_value(round_counter)
                 board.move(player_move_value, *input_box1)
                 board.move(player_move_value, *input_box2)
-                board.__cycle__()
-                win_status = board.__win__()
+                board.cycle()
+                win_status = board.win()
                 if win_status:
                     print(win_status)
                     print(board)
@@ -46,8 +50,8 @@ def main():
                 computer_move_value = get_move_value(round_counter + 1)
                 for box in move_boxes:
                     board.move(computer_move_value, *box)
-                board.__cycle__()
-                win_status = board.__win__()
+                board.cycle()
+                win_status = board.win()
                 if win_status:
                     print(win_status)
                     print(board)
@@ -60,8 +64,8 @@ def main():
                 computer_move_value = get_move_value(round_counter)
                 for box in move_boxes:
                     board.move(computer_move_value, *box)
-                board.__cycle__()
-                win_status = board.__win__()
+                board.cycle()
+                win_status = board.win()
                 if win_status:
                     print(win_status)
                     print(board)
@@ -75,8 +79,8 @@ def main():
                 player_move_value = get_move_value(round_counter + 1)
                 board.move(player_move_value, *input_box1)
                 board.move(player_move_value, *input_box2)
-                board.__cycle__()
-                win_status = board.__win__()
+                board.cycle()
+                win_status = board.win()
                 if win_status:
                     print(win_status)
                     print(board)

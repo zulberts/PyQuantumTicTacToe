@@ -409,7 +409,7 @@ def test_cycle_occures_multiples():
             ],
         ]
     )
-    assert cycle(array, 4) is True
+    assert cycle(array, 5) is True
 
 
 def test_replace_character_empty():

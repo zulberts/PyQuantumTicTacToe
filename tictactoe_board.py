@@ -39,7 +39,7 @@ class TicTacToeBoard:
         else:
             print("Ruch nie jest możliwy")
 
-    def __cycle__(self) -> None:
+    def cycle(self) -> None:
         """
         Checks for and resolves cycles on the game board.
 
@@ -64,7 +64,7 @@ class TicTacToeBoard:
         """
         return print_matrix(self.board)
 
-    def __win__(self) -> str:
+    def win(self) -> str:
         """
         Checks if a win condition is met on the game board.
 
