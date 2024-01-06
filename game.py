@@ -5,9 +5,11 @@ from players_logic import (
     input_boxes,
 )
 from tictactoe_board import TicTacToeBoard
+from print_functions import print_rules
 
 
 def main():
+    print_rules()
     while True:
         print("Witaj w Kwantowym Kółko i Krzyżyk!")
         message = "Wybierz przeciwnika (1 - losowy, 2 - strategiczny): "
@@ -21,10 +23,10 @@ def main():
         player_starts = player_symbol.upper() == "X"
         board = TicTacToeBoard()
         round_counter = 1
-        print(board)
         message = "Gra zakończyła się remisem ponieważ nie doszło do cyklu."
         if player_starts:
             while True:
+                print(board)
                 print("Twój ruch.")
                 input_box1, input_box2 = input_boxes(board.impossible_moves)
                 player_move_value = get_move_value(round_counter)
@@ -36,7 +38,6 @@ def main():
                     print(win_status)
                     print(board)
                     break
-                print(board)
                 if round_counter == 9:
                     print(message)
                     break
@@ -51,7 +52,6 @@ def main():
                     print(win_status)
                     print(board)
                     break
-                print(board)
                 round_counter += 2
         else:
             while True:
@@ -81,7 +81,6 @@ def main():
                     print(win_status)
                     print(board)
                     break
-                print(board)
                 round_counter += 2
         play_again = input("Czy chcesz zagrać jeszcze raz? (tak/nie): ")
         if play_again.lower() != "tak":
