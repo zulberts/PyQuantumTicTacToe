@@ -11,7 +11,6 @@ git clone https://gitlab-stud.elka.pw.edu.pl/askutnik/projekt-pipr-quantum-tic-t
 cd projekt-pipr-quantum-tic-tac-toe
 Następnie w termialu należy wpisać:
 Linux: `python3 game.py`
-Windows: `python game.py`
 
 
 # Instrukcja dla graczy
@@ -44,6 +43,11 @@ tak, że dwóch graczy mogłoby wygrać.
 -gracz który wybiera pola strategicznie.(pola bez żadnego x lub o)
 Oraz gracz ma możliwość wyboru czy chce grać jako X lub jako O.
 7. Gra automatycznie sprawdza, kto wygrał i wyświetla tą wiadomość w terminalu.
+
+
+# Testy w wirtualnym środowisku
+Testując nadleży użyć komendy:
+`.venv/bin/pytest`
 
 
 # Dalsza dokumentacja
