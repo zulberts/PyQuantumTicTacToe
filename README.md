@@ -7,10 +7,15 @@ Projekt to gra kwantowe kółko krzyżyk w termialu.
 
 # Instalacja gry
 ---
-git clone https://gitlab-stud.elka.pw.edu.pl/askutnik/projekt-pipr-quantum-tic-tac-toe.git
-cd projekt-pipr-quantum-tic-tac-toe
-Następnie w termialu należy wpisać:
-Linux: `python3 game.py`
+Linux:
+Kolejne linijki należy wpisywać w terminalu:
+`git clone https://gitlab-stud.elka.pw.edu.pl/askutnik/projekt-pipr-quantum-tic-tac-toe.git`
+`cd projekt-pipr-quantum-tic-tac-toe`
+`pip install virtualenv`
+`python3 -m venv .venv`
+`source .venv/bin/activate`
+`pip install -r requirements.txt`
+`python3 game.py`
 
 
 # Instrukcja dla graczy
