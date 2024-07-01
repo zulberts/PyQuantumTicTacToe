@@ -63,3 +63,20 @@ Szczegółowa dokumentacja znajduje się w pliku PDF.
 Jeżeli pojawią się problemy przy uruchamianiu gry lub przy testowaniu w
 wirtualnym środowisku należy z niego wyjść, zainstalować biblioteke numpy
 `pip install numpy` i uruchomić program bez użycia venv.
+
+
+## Uwagi dotyczące projektu
+
+# Uwagi związane z implementacją/stylem
+kod zarządzający planszą jest zhardkodowany i nie da się łatwo przerobić go na dynamiczną wielkość planszy
+w replace_character można było skorzystać z przykrytych operatorów w numpy, np.all(char == " " for char in box) ->(box == " ").all()
+main jest za dużą funkcją i wypadałoby ją bardziej rozbić
+magiczne stałe w kodzie dot. m.in. wielkości planszy i liczby rund
+typehinty niekompletne, np. w przypadku transform_listsygnatura powinna wyglądać następująco:def transform_list(list_coordinates: list[tuple[int, int, int]]) -> list[tuple[int, int]]
+
+# Uwagi związane z funkcjonalnością
+wpisując w ruchu dwukrotnie ten sam indeks jestem w stanie postawić pojedynczy znak
+wielkość planszy jest stała i nie da się jej zmienić
+
+## podsumowanie
+To mój pierwszy projekt, może go poprawie chociaż wątpie, generalnie logika w tej grze jest ciężka, reszta rzeczy do poprawy trywialna.
